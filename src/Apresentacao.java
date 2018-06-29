@@ -2,6 +2,7 @@
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -14,11 +15,8 @@ import javax.swing.JFileChooser;
  * @author Administrador
  */
 public class Apresentacao extends javax.swing.JFrame {
-    Anagrama anagrama = new Anagrama();
+    
 
-    /**
-     * Creates new form Apresentacao
-     */
     public Apresentacao() {
         initComponents();
         this.setResizable(false);
@@ -56,6 +54,7 @@ public class Apresentacao extends javax.swing.JFrame {
             }
         });
 
+        ta_saida.setEditable(false);
         ta_saida.setColumns(20);
         ta_saida.setRows(5);
         jScrollPane1.setViewportView(ta_saida);
@@ -93,11 +92,11 @@ public class Apresentacao extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void tf_localMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tf_localMouseClicked
-        // TODO add your handling code here:
-         JFileChooser jfc = new JFileChooser(tf_local.getText());
-        jfc.setDialogTitle("Selecionar caminho");
+        JFileChooser jfc = new JFileChooser(tf_local.getText());
+        jfc.setDialogTitle("Selecionar arquivo");
         jfc.setApproveButtonText("Carregar");
-
+        jfc.setFileFilter(new FileNameExtensionFilter("Arquivos de Texto", "TXT"));
+        
         if (jfc.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
             this.tf_local.setText(jfc.getSelectedFile().toString());
         }
@@ -106,7 +105,7 @@ public class Apresentacao extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODtO add your handling code here:
         if((int)s_quantidade.getValue() > 0 && !tf_local.getText().isEmpty()){
-            ta_saida.setText(anagrama.anagramas(tf_local.getText(), (int)s_quantidade.getValue()));
+            ta_saida.setText(new Anagrama().anagramas(tf_local.getText(), (int)s_quantidade.getValue()));
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
